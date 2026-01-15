@@ -12,11 +12,8 @@ Automatic move detection and score calculation system for the Qwirkle Connect bo
   - [Color Detection](#3-color-detection)
   - [Bonus Management](#4-bonus-management)
   - [Score Calculation](#5-score-calculation)
-- [Usage](#usage)
 - [Output Format](#output-format)
-- [Algorithm Details](#algorithm-details)
 - [Observations and Limitations](#observations-and-limitations)
-- [Author](#author)
 
 ## Introduction
 
@@ -139,16 +136,10 @@ The score of a move is calculated based on the difference between the previous a
    - Position bonuses: +1 or +2 for new pieces placed on bonus cells
 5. **Total Score**: Sum of scores from all formed lines
 
-## Usage
 
-```bash
-python main.py
-```
+## Output Format  
 
-The script processes 5 games, each with 20 moves (100 images total), reading from the `testare/` directory and outputting results to the specified output directory.
-
-## Output Format
-
+The script processes 5 games, each with 20 moves (100 images total), outputting results to the specified output directory.
 For each move image, the system generates a `.txt` file containing:
 
 ```
@@ -188,48 +179,13 @@ This indicates:
 - `G` = Green
 - `B` = Blue
 
-## Algorithm Details
-
-### Corner Detection Algorithm
-
-```python
-# Extreme point detection using coordinate operations
-top_left = pts[np.argmin(sums)]       # minimum x+y
-bottom_right = pts[np.argmax(sums)]   # maximum x+y
-top_right = pts[np.argmin(diffs)]     # minimum x-y
-bottom_left = pts[np.argmax(diffs)]   # maximum x-y
-```
-
-### Template Matching
-
-All templates and patches are normalized using `cv.NORM_MINMAX` before comparison to ensure consistent matching across varying lighting conditions.
-
-### Line Extension
-
-The system efficiently finds all horizontal and vertical lines containing newly placed pieces. It uses unique keys `(direction, position, start, end)` to track processed line segments and avoid duplicate scoring.
 
 ## Observations and Limitations
 
-Although the system generally works well, some situations have been identified where detection errors occur. Occasionally, template matching hallucinates non-existent pieces:
+Although the system generally works well, some situations have been identified where detection errors occur. Occasionally, template matching hallucinates non-existent pieces:  
 
-- **Circles** in empty central areas
-- **Squares** on board edges
+![False detection](images/false_detection.jpg)  
 
-These false positives are caused by:
-- Noise in padding regions
-- Similar patterns in empty cells
-- Lighting variations creating shape-like shadows
-
-**Future improvements:**
-- Adaptive thresholding for varying lighting conditions
-- Deep learning-based piece detection for improved robustness
-- Enhanced false positive filtering
-- Support for different camera angles and distances
-
-## Author
-
-**Cochior Iulia-Ștefana**  
-Group 344  
 Computer Vision Project
 
 ---
