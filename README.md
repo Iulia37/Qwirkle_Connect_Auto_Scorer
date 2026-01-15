@@ -184,10 +184,5 @@ This indicates:
 
 Although the system generally works well, some situations have been identified where detection errors occur. Occasionally, template matching hallucinates non-existent pieces:  
 
-![False detection](images/false_detection.jpg)  
+![False detection](images/false_detection.png)  
 
-Computer Vision Project
-
----
-
-*For questions or issues, please open an issue on GitHub.*
